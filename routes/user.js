@@ -1,5 +1,5 @@
 import  express from "express";
-import { verifyToken,authorizedToken,authorizedTokenbyAdmin } from "./verifyToken.js";
+import { authorizedToken,authorizedTokenbyAdmin } from "./verifyToken.js";
 import CryptoJS from "crypto-js";
 import User from "../model/User.js";
 import moment from "moment";

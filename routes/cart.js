@@ -1,4 +1,3 @@
-// Import required modules using ES6 syntax
 import express from 'express';
 import { authorizedToken, authorizedTokenbyAdmin, verifyToken } from './verifyToken.js';
 import Cart from '../model/Cart.js';
