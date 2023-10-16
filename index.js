@@ -8,6 +8,7 @@ import productRouter from "./routes/product.js"
 import cartRouter from './routes/cart.js'
 import orderRouter from './routes/order.js'
 import stripeOrder from './routes/stripe.js'
+import moreProduct from "./routes/moreProducts.js";
 import cors from "cors"
 dotenv.config();
 
@@ -23,12 +24,13 @@ app.use(express.json());
 const router = express.Router();
 
 app.use(cors())
-app.use('/api/user', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/checkout', stripeOrder);
+app.use('/api/moreProducts', moreProduct);
 
 
 

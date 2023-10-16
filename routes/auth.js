@@ -63,6 +63,36 @@ const {password , ...other}=user._doc
   }
 });
 
+
+
+
+// LOGOUT USER
+router.post('/logout', async (req, res) => {
+  try {
+    const token = req.header('Authorization').replace('Bearer ', '');
+
+    // Find the user based on the token
+    const user = await User.findOne({ 'token': token });
+
+    if (!user) {
+      return res.status(401).send({ error: 'User not found' });
+    }
+
+    // Remove the token from the user's tokens array
+    user.tokens = user.tokens.filter((storedToken) => storedToken !== token);
+    await user.save();
+
+    res.status(200).send({ message: 'Logout successful' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
 export default router;
 
 

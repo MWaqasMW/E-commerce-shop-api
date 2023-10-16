@@ -7,30 +7,18 @@ const ProductSchema = new  mongoose.Schema(
         required: true,
         unique: true,
       },
-      desc: {
-        type: String,
-        required: true,
-      
-      },
+   
       img: {
         type: String,
         required: true,
       },
-      catergoires: {
+      categories: {
         type: Array,
         
       },
-      size: {
-        type: String,
-     
-      },
-      color: {
-        type: String,
-        
-      },
-      price: {
-        type: Number,
-        required: true,
+      inStock:{
+        type:Boolean,
+        default:true,
       },
       timestamp: { type: Date, default: Date.now }
 

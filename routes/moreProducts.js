@@ -1,13 +1,13 @@
 // Import required modules using ES6 syntax
 import express from 'express';
 import { authorizedTokenbyAdmin } from './verifyToken.js';
-import Product from '../model/Product.js';
+import MoreProducts from '../model/MoreProducts.js';
 
 const router = express.Router();
 
 // PRODUCT POST
 router.post('/', authorizedTokenbyAdmin, async (req, res) => {
-  const newProduct = new Product(req.body);
+  const newProduct = new MoreProducts(req.body);
 
   try {
     const savedProduct = await newProduct.save();
@@ -21,7 +21,7 @@ router.post('/', authorizedTokenbyAdmin, async (req, res) => {
 router.put("/:id",authorizedTokenbyAdmin, async(req,res)=>{
 try{
 
-const updatedProduct = await Product.findByIdAndUpdate(req.params.id,{
+const updatedProduct = await MoreProducts.findByIdAndUpdate(req.params.id,{
     $set:req.body
 
 })
@@ -49,10 +49,10 @@ res.status(200).json("Product has been deleted")
 
 
 // // GET product BY ID
-router.get("/find/:id",authorizedTokenbyAdmin, async(req,res)=>{
+router.get("/find/:id", async(req,res)=>{
 
   try{
-const product = await Product.findById(req.params.id);
+const product = await MoreProducts.findById(req.params.id);
 
       res.status(200).json(product)
 
@@ -79,16 +79,16 @@ router.get("/", async (req, res) => {
   
       if (qNew) {
         // Filter products by new product
-        products = await Product.find().sort({ timestamp: -1 }).limit(5);
+        products = await MoreProducts.find().sort({ timestamp: -1 }).limit(5);
       } else if (qCategoriey) { // Fix the typo
         // Filter products by categories
-        products = await Product.find({
+        products = await MoreProducts.find({
           categories: {
             $in: [qCategoriey],
           },
         });
       } else {
-        products = await Product.find();
+        products = await MoreProducts.find();
       }
   
       res.status(200).json({ products });
